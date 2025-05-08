@@ -5,6 +5,7 @@ import java.lang.reflect.Modifier;
 public class JogoMinecraft{
     public static void main(String [] args) throws Exception {
         var jogador = new JogadorMinecraft("Alex");
+        var jogador2 = new JogadorMinecraft("Steve Construtor");
         var rand = new Random();
         Class<?> classe = JogadorMinecraft.class;
         Method [] metodos = classe.getDeclaredMethods();
@@ -17,25 +18,40 @@ public class JogoMinecraft{
         }
         while(true)
         {
-            var acao = rand.nextInt(numeroDeMetodos)+1;
-            var chanceDano = rand.nextDouble();
-            switch(acao)
+            var acaoAlex = rand.nextInt(numeroDeMetodos)+1;
+            var chanceDanoAlex = rand.nextDouble();
+            var chanceDanoSteve = rand.nextDouble();
+            var acaoSteve = rand.nextDouble();
+
+            if(jogador.estaVivo())
             {
-                case 1:
-                jogador.minerar();
-                break;
-                case 2:
-                jogador.coletarMadeira();
-                break;
-                case 3:
-                jogador.construir();
-                break;
-                default:
-                System.out.println("Acao invalida!");
+                switch(acaoAlex)
+                {
+                    case 1:
+                    jogador.minerar();
+                    break;
+                    case 2:
+                    jogador.coletarMadeira();
+                    break;
+                    case 3:
+                    jogador.construir();
+                    break;
+                    default:
+                    System.out.println("Acao invalida!");
+                }
+                if(chanceDanoAlex <= 0.25) jogador.levarDano();
             }
-            if(chanceDano <= 0.25) jogador.levarDano();
+            if(jogador2.estaVivo())
+            {
+                if(acaoSteve <= 0.6) jogador2.construir();
+                if(acaoSteve > 0.6 && acaoSteve <= 0.9) jogador2.coletarMadeira();
+                if(acaoSteve > 0.9 && acaoSteve <= 1) jogador2.minerar();
+                if(chanceDanoSteve <= 0.25) jogador2.levarDano();
+            }    
+
             System.out.println(jogador);
-            if(jogador.getVida() <= 0)
+            System.out.println(jogador2);
+            if(!jogador.estaVivo() && !jogador2.estaVivo())
             {
                 System.out.println("-------------");
                 System.out.println("| GAME OVER |");
