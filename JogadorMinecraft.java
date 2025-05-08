@@ -43,6 +43,10 @@ public class JogadorMinecraft {
         return vida > 0;
     }
 
+    public int getVida(){
+        return vida;
+    }
+
     @Override
     public String toString() {
         return String.format(

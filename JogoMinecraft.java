@@ -11,13 +11,14 @@ public class JogoMinecraft{
         int numeroDeMetodos = 0;
 
         for (Method metodo : metodos) {
-            if (Modifier.isPublic(metodo.getModifiers()) && !metodo.getName().equals("toString") && !metodo.getName().equals("levarDano") && !metodo.getName().equals("estaVivo")) {
+            if (Modifier.isPublic(metodo.getModifiers()) && !metodo.getName().equals("toString") && !metodo.getName().equals("levarDano") && !metodo.getName().equals("estaVivo") && !metodo.getName().equals("getVida")) {
                 numeroDeMetodos++;
             }
         }
         while(true)
         {
             var acao = rand.nextInt(numeroDeMetodos)+1;
+            var chanceDano = rand.nextDouble();
             switch(acao)
             {
                 case 1:
@@ -32,7 +33,15 @@ public class JogoMinecraft{
                 default:
                 System.out.println("Acao invalida!");
             }
+            if(chanceDano <= 0.25) jogador.levarDano();
             System.out.println(jogador);
+            if(jogador.getVida() <= 0)
+            {
+                System.out.println("-------------");
+                System.out.println("| GAME OVER |");
+                System.out.println("-------------");
+                break;
+            } 
             System.out.println("============");
             Thread.sleep(5000);
         }
