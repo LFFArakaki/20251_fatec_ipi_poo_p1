@@ -34,6 +34,11 @@ public class JogadorMinecraft {
         }
     }
 
+    public void atacar(JogadorMinecraft inimigo){
+        System.out.println(this.nome + " atacou " + inimigo.getNome());
+        inimigo.levarDano();
+    }
+
     public void levarDano() {
         vida--;
         System.out.println(nome + " levou dano! Vida atual: " + vida);
@@ -41,6 +46,10 @@ public class JogadorMinecraft {
 
     public boolean estaVivo() {
         return vida > 0;
+    }
+
+    public String getNome(){
+        return nome;
     }
 
     @Override

@@ -12,7 +12,7 @@ public class JogoMinecraft{
         int numeroDeMetodos = 0;
 
         for (Method metodo : metodos) {
-            if (Modifier.isPublic(metodo.getModifiers()) && !metodo.getName().equals("toString") && !metodo.getName().equals("levarDano") && !metodo.getName().equals("estaVivo") && !metodo.getName().equals("getVida")) {
+            if (Modifier.isPublic(metodo.getModifiers()) && !metodo.getName().equals("toString") && !metodo.getName().equals("levarDano") && !metodo.getName().equals("estaVivo") && !metodo.getName().equals("getNome") && !metodo.getName().equals("atacar")) {
                 numeroDeMetodos++;
             }
         }
@@ -22,6 +22,13 @@ public class JogoMinecraft{
             var chanceDanoAlex = rand.nextDouble();
             var chanceDanoSteve = rand.nextDouble();
             var acaoSteve = rand.nextDouble();
+            var chanceAtaque = rand.nextDouble();
+
+            if(jogador.estaVivo() && jogador2.estaVivo())
+            {
+                if(chanceAtaque <= 0.5) jogador.atacar(jogador2);
+                else jogador2.atacar(jogador);
+            }
 
             if(jogador.estaVivo())
             {
