@@ -44,6 +44,11 @@ public class JogoMinecraft{
                 if(acao > jogadores.get(0).getProbMadeira() && acao <= jogadores.get(0).getProbMadeira()+jogadores.get(0).getProbConstruir()) jogadores.get(0).construir();
                 if(acao > jogadores.get(0).getProbMadeira()+jogadores.get(0).getProbConstruir()) jogadores.get(0).minerar();
                 if(chanceDano <= 0.25) jogadores.get(0).levarDano();
+
+                jogadores.get(0).setProbMadeira(rand.nextFloat());
+                jogadores.get(0).setProbConstruir(rand.nextFloat(1-jogadores.get(0).getProbMadeira()));
+                jogadores.get(0).setProbMinerar(rand.nextFloat(1-(jogadores.get(0).getProbMadeira()+jogadores.get(0).getProbConstruir())));
+                JogadorMinecraftDAO.atualizar(jogadores.get(0));
             }
             if(jogadores.get(1).estaVivo())
             {
@@ -53,6 +58,11 @@ public class JogoMinecraft{
                 if(acao > jogadores.get(1).getProbMadeira() && acao <= jogadores.get(1).getProbMadeira()+jogadores.get(1).getProbConstruir()) jogadores.get(1).construir();
                 if(acao > jogadores.get(1).getProbMadeira()+jogadores.get(1).getProbConstruir()) jogadores.get(1).minerar();
                 if(chanceDano <= 0.25) jogadores.get(1).levarDano();
+
+                jogadores.get(1).setProbMadeira(rand.nextFloat());
+                jogadores.get(1).setProbConstruir(rand.nextFloat(1-jogadores.get(1).getProbMadeira()));
+                jogadores.get(1).setProbMinerar(rand.nextFloat(1-(jogadores.get(1).getProbMadeira()+jogadores.get(1).getProbConstruir())));
+                JogadorMinecraftDAO.atualizar(jogadores.get(1));
             }    
 
             System.out.println(jogadores.get(0));
@@ -63,9 +73,8 @@ public class JogoMinecraft{
                 System.out.println("| GAME OVER |");
                 System.out.println("-------------");
                 break;
-            } 
-            JogadorMinecraftDAO.atualizar(jogadores.get(0));
-            JogadorMinecraftDAO.atualizar(jogadores.get(1));
+            }
+            
             System.out.println("============");
             Thread.sleep(5000);
         }
