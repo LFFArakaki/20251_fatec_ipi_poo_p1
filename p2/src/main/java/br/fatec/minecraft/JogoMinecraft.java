@@ -14,8 +14,26 @@ public class JogoMinecraft{
             var chanceAtaque = rand.nextDouble();
             if(jogadores.get(0).estaVivo() && jogadores.get(1).estaVivo())
             {
-                if(chanceAtaque <= 0.5) jogadores.get(0).atacar(jogadores.get(1));
-                else jogadores.get(1).atacar(jogadores.get(0));
+                if(chanceAtaque <= 0.5)
+                {
+                    jogadores.get(0).atacar(jogadores.get(1));
+                    if(!jogadores.get(1).estaVivo())
+                    {
+                        System.out.println(jogadores.get(0).getNome() + " venceu!");
+                        jogadores.get(0).setNumVitorias(jogadores.get(0).getNumVitorias()+1);
+                        jogadores.get(1).setNumDerrotas(jogadores.get(1).getNumDerrotas()+1);
+                    }
+                }
+                else
+                {
+                    jogadores.get(1).atacar(jogadores.get(0));
+                    if(!jogadores.get(0).estaVivo())
+                    {
+                        System.out.println(jogadores.get(1).getNome() + " venceu!");
+                        jogadores.get(1).setNumVitorias(jogadores.get(1).getNumVitorias()+1);
+                        jogadores.get(0).setNumDerrotas(jogadores.get(0).getNumDerrotas()+1);
+                    }
+                }   
             }
 
             if(jogadores.get(0).estaVivo())
@@ -46,6 +64,8 @@ public class JogoMinecraft{
                 System.out.println("-------------");
                 break;
             } 
+            JogadorMinecraftDAO.atualizar(jogadores.get(0));
+            JogadorMinecraftDAO.atualizar(jogadores.get(1));
             System.out.println("============");
             Thread.sleep(5000);
         }
